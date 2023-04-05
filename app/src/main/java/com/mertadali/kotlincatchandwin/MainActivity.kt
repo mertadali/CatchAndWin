@@ -56,7 +56,9 @@ class MainActivity : AppCompatActivity() {
         object : CountDownTimer(30000,1000){
             override fun onTick(p0: Long) {
                 binding.textView2.text="Time: " +p0/1000
-                sayac = sayac+1
+                sayac = sayac+1                                     /*Bu yapı bize ne kadar süreden başlasın ve ne kadar
+                 süreyle azalsın şeklinde bir yapı oluşturmaya yaradı. Ontick denilen fonksiyon her tıklandığında ne olacağını yapan işlemdir.
+                 on finish ise bittiğinde ne yapılacağını yazdığımız fonksiyondur.*/
             }
 
             override fun onFinish() {
@@ -65,11 +67,11 @@ class MainActivity : AppCompatActivity() {
                 handler.removeCallbacks(runnable)
                 for (image in imageArray){
                     image.visibility= View.INVISIBLE
-                    if (sayac>10){
+                    if (sayac>=10){
                         Toast.makeText(this@MainActivity,"Congrats :)",Toast.LENGTH_LONG).show()
                     }else if (sayac<10){
-                        Toast.makeText(this@MainActivity,"Stupid :(",Toast.LENGTH_LONG).show()
-                    }
+                        Toast.makeText(this@MainActivity,"Failed :(",Toast.LENGTH_LONG).show()
+                    }          // Toast message alt kısımda oyun bittiğinde bize bir mesaj iletecek.
 
 
                 }
@@ -77,10 +79,10 @@ class MainActivity : AppCompatActivity() {
 
                 val alert = AlertDialog.Builder(this@MainActivity)
                 alert.setTitle("Game Over!")
-                alert.setMessage("Do you want to start again?")
+                alert.setMessage("Do you want to start again?")               // oyun bitince tekrardan oynamak istersek bize mesaj ile soracak.
                 alert.setPositiveButton("Yes") {dialog,  which ->
                     // Restart Game
-                    val intent = intent
+                    val intent = intent               // eğer kullanıcı evet tuşuna basarsa intent tekrardan açılacak.
                     finish()
                     startActivity(intent)
                 }
@@ -100,7 +102,7 @@ class MainActivity : AppCompatActivity() {
         runnable = object : Runnable{
             override fun run() {
                 for (image in imageArray){
-                    image.visibility= View.INVISIBLE
+                    image.visibility= View.INVISIBLE           // verilen layoutların başlangıçta gizli olması ve ardından random bir şekilde bize gösterişlmesini sağlıyoruz.
                 }
 
                 // gizlediğimiz görselleri şimdi de rastgele bir şekilde görünür yapalım
